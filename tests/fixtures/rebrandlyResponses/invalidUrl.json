@@ -1,0 +1,38 @@
+{
+  "statusCode": 403,
+  "body": "{\"message\":\"Invalid format\",\"code\":\"InvalidFormat\",\"source\":\"link\",\"errors\":[{\"code\":\"RequiredField\",\"property\":\"destination\",\"message\":\"Cannot be empty\",\"verbose\":\"destination cannot be empty\"}]}",
+  "headers": {
+    "access-control-allow-headers": "Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization",
+    "access-control-allow-methods": "GET,PUT,POST,DELETE,OPTIONS",
+    "access-control-allow-origin": "*",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Sat, 20 May 2017 15:15:07 GMT",
+    "etag": "W/\"c4-N24UdNSJQERU5FyJp0BDG3uCw/g\"",
+    "vary": "Accept-Encoding",
+    "x-powered-by": "Express",
+    "content-length": "196",
+    "connection": "Close"
+  },
+  "request": {
+    "uri": {
+      "protocol": "https:",
+      "slashes": true,
+      "auth": null,
+      "host": "api.rebrandly.com",
+      "port": 443,
+      "hostname": "api.rebrandly.com",
+      "hash": null,
+      "search": null,
+      "query": null,
+      "pathname": "/v1/links",
+      "path": "/v1/links",
+      "href": "https://api.rebrandly.com/v1/links"
+    },
+    "method": "POST",
+    "headers": {
+      "apikey": "bf5727f9d7384b7aad376f62f9c43692",
+      "Content-Type": "application/json",
+      "content-length": 23
+    }
+  }
+}

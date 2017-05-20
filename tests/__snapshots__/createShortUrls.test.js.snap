@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should handle a generic server error 1`] = `
+Array [
+  [Error: Cannot create short URL for "http://example.com": Some Server error happened ()],
+]
+`;
+
+exports[`It should handle error because of invalid domain 1`] = `
+Array [
+  [Error: Cannot create short URL for "http://example.com": Not found (domain)],
+]
+`;
+
+exports[`It should handle error because of invalid url 1`] = `
+Array [
+  Object {
+    "code": "InvalidFormat",
+    "errors": Array [
+      Object {
+        "code": "RequiredField",
+        "message": "Cannot be empty",
+        "property": "destination",
+        "verbose": "destination cannot be empty",
+      },
+    ],
+    "message": "Invalid format",
+    "source": "link",
+  },
+]
+`;
+
+exports[`It should handle invalid error because of an invalid apikey 1`] = `
+Array [
+  [Error: Unauthorized. Verify that you are using a valid Rebrandly apikey],
+]
+`;
+
+exports[`It should successfully create a shortUrl 1`] = `
+Array [
+  Object {
+    "clicks": 0,
+    "createdAt": "2017-05-20T15:16:07.000Z",
+    "creator": Object {
+      "avatarUrl": "https://s.gravatar.com/avatar/e18d2c2510d828bc95bde6817e6e9ce2?size=80&d=retro&rating=g",
+      "fullName": "Luciano",
+      "id": "25bbd054d27e408f8ab9e0e1dd8de112",
+    },
+    "destination": "https://facebook.github.io/jest/docs/expect.html",
+    "domain": Object {
+      "fullName": "rebrand.ly",
+      "id": "8f104cc5b6ee4a4ba7897b06ac2ddcfb",
+      "ref": "/domains/8f104cc5b6ee4a4ba7897b06ac2ddcfb",
+    },
+    "domainId": "8f104cc5b6ee4a4ba7897b06ac2ddcfb",
+    "domainName": "rebrand.ly",
+    "favourite": false,
+    "forwardParameters": true,
+    "https": true,
+    "id": "1611678",
+    "isPublic": false,
+    "linkId": 1611678,
+    "scripts": Array [],
+    "shortUrl": "rebrand.ly/dxws",
+    "slashtag": "dxws",
+    "status": "active",
+    "tags": Array [],
+    "title": "Link dxws",
+    "updatedAt": "2017-05-20T15:16:07.000Z",
+  },
+]
+`;

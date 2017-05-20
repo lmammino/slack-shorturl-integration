@@ -1,14 +1,12 @@
 const request = require('request-promise-native')
 
+const createError = (sourceUrl, message, sourceField) => new Error(`Cannot create short URL for "${sourceUrl}": ${message} (${sourceField})`)
+
 const createShortUrlFactory = (apikey) => (options) => new Promise((resolve, reject) => {
-  const body = { destination: options.url }
-
-  if (options.domain) {
-    body.domain = { fullName: options.domain }
-  }
-
-  if (options.slashtag) {
-    body.slashtag = options.slashtag
+  const body = {
+    destination: options.url,
+    domain: options.domain ? { fullName: options.domain } : undefined,
+    slashtag: options.slashtag ? options.slashtag : undefined
   }
 
   const req = request({
@@ -18,15 +16,26 @@ const createShortUrlFactory = (apikey) => (options) => new Promise((resolve, rej
       apikey,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
+    resolveWithFullResponse: true
   })
 
   req
-    .then((response) => resolve(JSON.parse(response)))
+    .then((response) => {
+      const result = JSON.parse(response.body)
+      if (result.httpCode === 404) {
+        resolve(createError(options.url, result.message, result.source))
+      } else {
+        resolve(result)
+      }
+    })
     .catch((err) => {
-      // TODO: manage 403 (existing slashtag) and 404 (unexistent domain) errors
-      console.log(err)
-      resolve(new Error(`Cannot create shortUrl for "${options.url}": ${err.message}`))
+      if (err.response.statusCode === 401) {
+        return resolve(new Error('Unauthorized. Verify that you are using a valid Rebrandly apikey'))
+      }
+
+      const serverErr = err.message
+      resolve(createError(options.url, serverErr, ''))
     })
 })
 
