@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should return an error if multiple domains are provided 1`] = `[Error: Multiple domains found. You can specify at most one domain]`;
+
+exports[`It should return an error if no url is specified 1`] = `[Error: No url found in the message]`;
+
+exports[`It should return an error if there are more slashtags than urls 1`] = `[Error: Urls/Slashtags mismatch: you specified more slashtags than urls]`;

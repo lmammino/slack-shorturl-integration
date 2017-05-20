@@ -9,7 +9,7 @@ const createErrorAttachment = (error) => ({
 
 const createSuccessAttachment = (link) => ({
   color: 'good',
-  text: `*<http://${link.shortUrl}|${link.shortUrl}>*:\n${link.destination}`,
+  text: `*<http://${link.shortUrl}|${link.shortUrl}>* (<https://www.rebrandly.com/links/${link.id}|edit>):\n${link.destination}`,
   mrkdwn_in: ['text']
 })
 
@@ -48,7 +48,10 @@ const slashCommandFactory = (createShortUrls, slackToken) => (body) => new Promi
 
   createShortUrls(urls, domain, slashtags)
     .then((result) => {
-      return resolve(result.map(createAttachment))
+      return resolve({
+        text: `${result.length} link(s) processed`,
+        attachments: result.map(createAttachment)
+      })
     })
 })
 

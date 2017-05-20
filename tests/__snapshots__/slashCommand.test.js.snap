@@ -1,24 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`It should create a proper slack response for short urls 1`] = `
-Array [
-  Object {
-    "color": "good",
-    "mrkdwn_in": Array [
-      "text",
-    ],
-    "text": "*<http://rebrand.ly/dxws|rebrand.ly/dxws>*:
+Object {
+  "attachments": Array [
+    Object {
+      "color": "good",
+      "mrkdwn_in": Array [
+        "text",
+      ],
+      "text": "*<http://rebrand.ly/dxws|rebrand.ly/dxws>* (<https://www.rebrandly.com/links/1611678|edit>):
 https://facebook.github.io/jest/docs/expect.html",
-  },
-  Object {
-    "color": "danger",
-    "mrkdwn_in": Array [
-      "text",
-    ],
-    "text": "*Error*:
+    },
+    Object {
+      "color": "danger",
+      "mrkdwn_in": Array [
+        "text",
+      ],
+      "text": "*Error*:
 Sample error",
-  },
-]
+    },
+  ],
+  "text": "2 link(s) processed",
+}
 `;
 
 exports[`It should reject if no body is provided 1`] = `
