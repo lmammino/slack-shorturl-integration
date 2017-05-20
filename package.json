@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "start:local": "source .env && npm run start",
     "start": "node src/server",
     "test:lint": "eslint src tests",
     "test:unit": "jest --verbose --coverage",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/lmammino/slack-shorturl-integration#readme",
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.2.0",

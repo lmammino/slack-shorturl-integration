@@ -1,2 +1,3 @@
+# Copy this file to .env and change specify the needed configuration below
 export SLACK_TOKEN="<ENTER YOUR SLACK SLASH COMMAND TOKEN HERE>"
 export REBRANDLY_APIKEY="<ENTER YOUR REBRANDLY API KEY HERE>"
