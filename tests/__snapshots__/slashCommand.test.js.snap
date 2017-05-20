@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should create a proper slack response for short urls 1`] = `
+Array [
+  Object {
+    "color": "good",
+    "mrkdwn_in": Array [
+      "text",
+    ],
+    "text": "*<http://rebrand.ly/dxws|rebrand.ly/dxws>*:
+https://facebook.github.io/jest/docs/expect.html",
+  },
+  Object {
+    "color": "danger",
+    "mrkdwn_in": Array [
+      "text",
+    ],
+    "text": "*Error*:
+Sample error",
+  },
+]
+`;
+
+exports[`It should reject if no body is provided 1`] = `
+Object {
+  "attachments": Array [
+    Object {
+      "color": "danger",
+      "mrkdwn_in": Array [
+        "text",
+      ],
+      "text": "*Error*:
+Invalid body",
+    },
+  ],
+  "text": "",
+}
+`;
+
+exports[`It should reject if the command input is not valid 1`] = `
+Object {
+  "attachments": Array [
+    Object {
+      "color": "danger",
+      "mrkdwn_in": Array [
+        "text",
+      ],
+      "text": "*Error*:
+No url found in the message",
+    },
+  ],
+  "text": "",
+}
+`;
+
+exports[`It should reject if the wrong token is provided 1`] = `
+Object {
+  "attachments": Array [
+    Object {
+      "color": "danger",
+      "mrkdwn_in": Array [
+        "text",
+      ],
+      "text": "*Error*:
+Invalid token",
+    },
+  ],
+  "text": "",
+}
+`;

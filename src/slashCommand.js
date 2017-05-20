@@ -1,28 +1,54 @@
 const commandParser = require('./commandParser')
 const validateCommandInput = require('./validateCommandInput')
 
+const createErrorAttachment = (error) => ({
+  color: 'danger',
+  text: `*Error*:\n${error.message}`,
+  mrkdwn_in: ['text']
+})
+
+const createSuccessAttachment = (link) => ({
+  color: 'good',
+  text: `*<http://${link.shortUrl}|${link.shortUrl}>*:\n${link.destination}`,
+  mrkdwn_in: ['text']
+})
+
+const createAttachment = (result) => {
+  if (result.constructor === Error) {
+    return createErrorAttachment(result)
+  }
+
+  return createSuccessAttachment(result)
+}
+
 const slashCommandFactory = (createShortUrls, slackToken) => (body) => new Promise((resolve, reject) => {
   if (!body) {
-    return reject(new Error('Invalid body'))
+    return resolve({
+      text: '',
+      attachments: [createErrorAttachment(new Error('Invalid body'))]
+    })
   }
 
   if (slackToken !== body.token) {
-    return reject(new Error('Invalid token'))
+    return resolve({
+      text: '',
+      attachments: [createErrorAttachment(new Error('Invalid token'))]
+    })
   }
 
   const { urls, domain, slashtags } = commandParser(body.text)
 
   let error
-  if ((error = validateCommandInput)) {
-    // TODO manage error
-    console.error(error)
+  if ((error = validateCommandInput(urls, domain, slashtags))) {
+    return resolve({
+      text: '',
+      attachments: [createErrorAttachment(error)]
+    })
   }
 
   createShortUrls(urls, domain, slashtags)
     .then((result) => {
-      console.log(result)
-      // TODO format the response as a slack slash command response
-      return resolve(JSON.stringify(result, null, 2))
+      return resolve(result.map(createAttachment))
     })
 })
 
