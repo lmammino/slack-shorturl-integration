@@ -1,24 +1,29 @@
-import parseMessage from './parseMessage';
+const commandParser = require('./commandParser')
+const validateCommandInput = require('./validateCommandInput')
 
-const createSlashCommand = (rebrandlyClient, slackToken) => (body) => new Promise((resolve, reject) => {
+const slashCommandFactory = (createShortUrls, slackToken) => (body) => new Promise((resolve, reject) => {
   if (!body) {
-    return reject(new Error('Invalid body'));
+    return reject(new Error('Invalid body'))
   }
 
   if (slackToken !== body.token) {
-    return reject(new Error('Invalid token'));
+    return reject(new Error('Invalid token'))
   }
 
-  const { urls, domain, tags } = parseMessage(body.text);
+  const { urls, domain, slashtags } = commandParser(body.text)
 
-  // TODO add defensive checks
+  let error
+  if ((error = validateCommandInput)) {
+    // TODO manage error
+    console.error(error)
+  }
 
-  rebrandlyClient.createLinks(urls, domain, tags)
+  createShortUrls(urls, domain, slashtags)
     .then((result) => {
-      console.log(result);
-      return resolve(JSON.stringify(result, null, 2));
+      console.log(result)
+      // TODO format the response as a slack slash command response
+      return resolve(JSON.stringify(result, null, 2))
     })
-  ;
-});
+})
 
-export default createSlashCommand;
+module.exports = slashCommandFactory

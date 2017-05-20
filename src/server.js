@@ -1,25 +1,24 @@
-import Express from 'express';
-import bodyParser from 'body-parser';
-import createClient from './rebrandlyClient';
-import createSlashCommand from './slashCommand';
+const Express = require('express')
+const bodyParser = require('body-parser')
+const createShortUrlsFactory = require('./createShortUrls')
+const slashCommandFactory = require('./slashCommand')
 
-const app = new Express();
-app.use(bodyParser.urlencoded({extended: true}));
+const app = new Express()
+app.use(bodyParser.urlencoded({extended: true}))
 
-const {SLACK_TOKEN: slackToken, REBRANDLY_APIKEY: apiKey} = process.env;
+const {SLACK_TOKEN: slackToken, REBRANDLY_APIKEY: apiKey} = process.env
 
 if (!slackToken || !apiKey) {
-  console.error('missing environment variables SLACK_TOKEN and/or REBRANDLY_APIKEY');
-  process.exit(1);
+  console.error('missing environment variables SLACK_TOKEN and/or REBRANDLY_APIKEY')
+  process.exit(1)
 }
 
-const rebrandlyClient = createClient(process.env.REBRANDLY_APIKEY);
-const slashCommand = createSlashCommand(rebrandlyClient, process.env.SLACK_TOKEN)
+const rebrandlyClient = createShortUrlsFactory(apiKey)
+const slashCommand = slashCommandFactory(rebrandlyClient, slackToken)
 
-app.post('/', async (req, res) => {
-  console.log(req.body);
-  const response = await slashCommand(req.body);
-  res.send(response);
-});
+app.post('/', (req, res) => {
+  slashCommand(req.body)
+    .then(res.send)
+})
 
-app.listen(3000, console.log);
+app.listen(3000, console.log)
