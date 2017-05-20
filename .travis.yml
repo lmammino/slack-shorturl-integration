@@ -3,4 +3,4 @@ node_js:
   - "6"
   - "7"
 after_script:
-  - ./node_modules/.bin/coveralls && rm -rf ./coverage
+  - ./node_modules/.bin/coveralls < ./coverage/lcov.info
