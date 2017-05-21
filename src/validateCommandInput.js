@@ -10,6 +10,10 @@ const validateCommandInput = (urls, domain, slashtags) => {
   if (Array.isArray(slashtags) && slashtags.length > urls.length) {
     return new Error('Urls/Slashtags mismatch: you specified more slashtags than urls')
   }
+
+  if (urls.length > 10) {
+    return new Error('You cannot shorten more than 10 URLs at the time')
+  }
 }
 
 module.exports = validateCommandInput
