@@ -1,6 +1,26 @@
 const request = require('request-promise-native')
 
-const createError = (sourceUrl, message, sourceField) => new Error(`Cannot create short URL for "${sourceUrl}": ${message} (${sourceField})`)
+const createErrorDescription = (code, err) => {
+  switch (code) {
+    case 400:
+      return 'Bad Request'
+    case 401:
+      return 'Unauthorized: Be sure you configured the integration to use a valid API key'
+    case 403:
+      return `Invalid request: ${err.source} ${err.message}`
+    case 404:
+      return `Not found: ${err.source} ${err.message}`
+    case 503:
+      return `Short URL service currently under maintenance. Retry later`
+    default:
+      return `Unexpected error connecting to Rebrandly APIs`
+  }
+}
+
+const createError = (sourceUrl, err) => {
+  const errorDescription = createErrorDescription(err.statusCode, JSON.parse(err.body))
+  return new Error(`Cannot create short URL for "${sourceUrl}": ${errorDescription}`)
+}
 
 const createShortUrlFactory = (apikey) => (options) => new Promise((resolve, reject) => {
   const body = {
@@ -23,19 +43,10 @@ const createShortUrlFactory = (apikey) => (options) => new Promise((resolve, rej
   req
     .then((response) => {
       const result = JSON.parse(response.body)
-      if (result.httpCode === 404) {
-        resolve(createError(options.url, result.message, result.source))
-      } else {
-        resolve(result)
-      }
+      resolve(result)
     })
     .catch((err) => {
-      if (err.response.statusCode === 401) {
-        return resolve(new Error('Unauthorized. Verify that you are using a valid Rebrandly apikey'))
-      }
-
-      const serverErr = err.message
-      resolve(createError(options.url, serverErr, ''))
+      resolve(createError(options.url, err.response))
     })
 })
 

@@ -1,5 +1,5 @@
 {
-  "statusCode": 200,
+  "statusCode": 404,
   "body": "{\"message\":\"Not found\",\"httpCode\":404,\"code\":\"NotFound\",\"source\":\"domain\",\"id\":\"nba.com\"}",
   "headers": {
     "access-control-allow-headers": "Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization",

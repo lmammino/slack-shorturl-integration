@@ -2,37 +2,37 @@
 
 exports[`It should handle a generic server error 1`] = `
 Array [
-  [Error: Cannot create short URL for "http://example.com": Some Server error happened ()],
+  [Error: Cannot create short URL for "http://example.com": Unexpected error connecting to Rebrandly APIs],
+]
+`;
+
+exports[`It should handle badRequest error 1`] = `
+Array [
+  [Error: Cannot create short URL for "http://example.com": Bad Request],
 ]
 `;
 
 exports[`It should handle error because of invalid domain 1`] = `
 Array [
-  [Error: Cannot create short URL for "http://example.com": Not found (domain)],
+  [Error: Cannot create short URL for "http://example.com": Not found: domain Not found],
 ]
 `;
 
 exports[`It should handle error because of invalid url 1`] = `
 Array [
-  Object {
-    "code": "InvalidFormat",
-    "errors": Array [
-      Object {
-        "code": "RequiredField",
-        "message": "Cannot be empty",
-        "property": "destination",
-        "verbose": "destination cannot be empty",
-      },
-    ],
-    "message": "Invalid format",
-    "source": "link",
-  },
+  [Error: Cannot create short URL for "invalidUrl": Invalid request: link Invalid format],
 ]
 `;
 
 exports[`It should handle invalid error because of an invalid apikey 1`] = `
 Array [
-  [Error: Unauthorized. Verify that you are using a valid Rebrandly apikey],
+  [Error: Cannot create short URL for "http://example.com": Unauthorized: Be sure you configured the integration to use a valid API key],
+]
+`;
+
+exports[`It should handle service unavailable error 1`] = `
+Array [
+  [Error: Cannot create short URL for "http://example.com": Short URL service currently under maintenance. Retry later],
 ]
 `;
 

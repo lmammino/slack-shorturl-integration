@@ -23,6 +23,7 @@ app.post('/', (req, res) => {
     .then((result) => {
       return res.json(result)
     })
+    .catch(console.error)
 })
 
 app.listen(port, () => {
