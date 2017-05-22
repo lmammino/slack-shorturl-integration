@@ -16,18 +16,13 @@ test('It should return an error if there are more slashtags than urls', () => {
   expect(validateCommandInput(['url1', 'url2'], 'somedomain', ['slashtag1', 'slashtag2', 'slashtag3'])).toMatchSnapshot()
 })
 
-test('It should return an error if there are more than 10 urls', () => {
+test('It should return an error if there are more than 5 urls', () => {
   expect(validateCommandInput([
     'http://fstack.link/10',
     'http://fstack.link/11',
     'http://fstack.link/12',
     'http://fstack.link/13',
     'http://fstack.link/14',
-    'http://fstack.link/15',
-    'http://fstack.link/16',
-    'http://fstack.link/17',
-    'http://fstack.link/18',
-    'http://fstack.link/19',
-    'http://fstack.link/20'
+    'http://fstack.link/15'
   ])).toMatchSnapshot()
 })

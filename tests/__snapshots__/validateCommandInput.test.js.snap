@@ -6,4 +6,4 @@ exports[`It should return an error if no url is specified 1`] = `[Error: No url 
 
 exports[`It should return an error if there are more slashtags than urls 1`] = `[Error: Urls/Slashtags mismatch: you specified more slashtags than urls]`;
 
-exports[`It should return an error if there are more than 10 urls 1`] = `[Error: You cannot shorten more than 10 URLs at the time]`;
+exports[`It should return an error if there are more than 5 urls 1`] = `[Error: You cannot shorten more than 5 URLs at the time]`;
