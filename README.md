@@ -112,9 +112,9 @@ If you find a bug or have an idea about how to improve the NorrisBot you can [op
 
 ## The Making of
 
-😎 **Spoiler** : I will soon publish a tutorial article based on this code that explains how to build your own custom Slack slash command using Node.js and Express. That's the reason why I tried to keep the code super simple and avoid additional complexity such as *Babel* and *ES201X*.
+This code was actually written as part of [a complete tutorial published on Scotch.io](https://scotch.io/tutorials/create-a-custom-slack-slash-command-with-nodejs-and-express). This tutorial explains how to build your own custom Slack slash command using Node.js and Express. That's the reason why I tried to keep the code super simple and avoid additional complexity such as *Babel* and *ES201X*.
 
-Stay tuned for the article!
+[![Create a custim slack slash command article cover image](https://cdn.scotch.io/1/VGjj7n91QtKd76TK49Ej_create-a-custom-slack-slash-command-with-node.png.jpg)](https://scotch.io/tutorials/create-a-custom-slack-slash-command-with-nodejs-and-express)
 
 
 ## License
